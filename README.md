@@ -99,11 +99,11 @@ The application follows **Hexagonal Architecture** with the following main layer
     DATABASE_PORT=5432
     COMPANY_DATABASE_PREFIX=saas_tenant
 
-
 4. **Usage**
 
   ```base
     pnpm run start:dev
+  ```
 
 ## API Endpoints
 
