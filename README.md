@@ -100,7 +100,7 @@ The application follows **Hexagonal Architecture** with the following main layer
     COMPANY_DATABASE_PREFIX=saas_tenant
 
 
-4. **Environment Configuration**
+4. **Usage**
 
   ```base
     pnpm run start:dev
