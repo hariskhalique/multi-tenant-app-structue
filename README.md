@@ -43,9 +43,9 @@ The application follows **Hexagonal Architecture** with the following main layer
     │   ├── in/
     │   │   └── http/                   # HTTP controllers for incoming requests
     │   │       └── saas_admin         
-    │   │         ├── admin.controller.ts # saas_admin controller for tenant management
+    │   │         └── admin.controller.ts # saas_admin controller for tenant management
     │   │       └── saas_tenant  
-    │   │         ├── customer.controller.ts # Controller for tenant customer operations
+    │   │         └── customer.controller.ts # Controller for tenant customer operations
     │   │
     │   └── out/
     │       ├── database/
