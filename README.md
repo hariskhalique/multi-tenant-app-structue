@@ -7,9 +7,10 @@ This project is a **multi-tenant SaaS application** built with **NestJS** using 
 - [Key Features](#key-features)
 - [Getting Started](#getting-started)
 - [Environment Configuration](#environment-configuration)
-- [Migrations](#migrations)
 - [Usage](#usage)
-- [License](#license)
+- [API Endpoints](#api-endpoints)
+- [Middleware](#middleware)
+- [Architectural Principles](#architectural-principles)
 
 ---
 
@@ -88,7 +89,7 @@ The application follows **Hexagonal Architecture** with the following main layer
    ```bash
    pnpm install
 
-3. **Environment Configuration**
+## Environment Configuration
   Create a .env file in the root directory and add the following environment variables. Adjust values as needed:
 
    ```bash
@@ -98,8 +99,9 @@ The application follows **Hexagonal Architecture** with the following main layer
     DATABASE_PASSWORD='postgres'
     DATABASE_PORT=5432
     COMPANY_DATABASE_PREFIX=saas_tenant
+   ```
 
-4. **Usage**
+## Usage
 
   ```base
     pnpm run start:dev
