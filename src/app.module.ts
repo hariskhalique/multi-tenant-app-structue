@@ -7,7 +7,12 @@ import { ConfigModule } from '@nestjs/config';
 import { AdminController } from './adapters/in/http/saas_admin/admin.controller';
 
 @Module({
-  imports: [ConfigModule.forRoot(), DatabaseModule, ApplicationModule, DomainModule],
+  imports: [
+    ConfigModule.forRoot(),
+    DatabaseModule,
+    ApplicationModule,
+    DomainModule,
+  ],
   controllers: [CustomerController, AdminController],
 })
 export class AppModule {}

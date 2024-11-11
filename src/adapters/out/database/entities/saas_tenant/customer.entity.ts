@@ -1,21 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Addresses } from './address.entity';
 
 @Entity({ name: 'customers' })
 export class CustomerEntity {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({ type: 'varchar', length: 255 })
-    name: string;
+  @Column({ type: 'varchar', length: 255 })
+  name: string;
 
-    @Column({ type: 'varchar', length: 255, unique: true })
-    email: string;
+  @Column({ type: 'varchar', length: 255, unique: true })
+  email: string;
 
-    @Column({ type: 'varchar', length: 255 })
-    address: string;
-
-    // Optional fields can be added as required by your application
-    // For example:
-    // @Column({ type: 'varchar', nullable: true })
-    // phoneNumber?: string;
+  @OneToMany(() => Addresses, (address) => address.customer, { cascade: true })
+  addresses: Addresses[];
 }

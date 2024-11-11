@@ -8,7 +8,7 @@ export class AdminController {
   constructor(
     private readonly getAllTenantUserCase: GetAllTenantsUserCase,
     private readonly getTenantByIdUserCase: GetTenantByIdUserCase,
-  ) { }
+  ) {}
 
   @Get('/tenants')
   async getAllTenants(): Promise<Tenant[]> {
@@ -16,7 +16,7 @@ export class AdminController {
   }
 
   @Get('tenants/:tenantId')
-  async getTenantById(@Param('tenantId') tenantId: string): Promise<Tenant> { 
+  async getTenantById(@Param('tenantId') tenantId: string): Promise<Tenant> {
     return await this.getTenantByIdUserCase.execute(tenantId);
   }
 }

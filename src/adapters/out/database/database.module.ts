@@ -1,9 +1,15 @@
-import { Module, MiddlewareConsumer, Global, RequestMethod } from '@nestjs/common';
+import {
+  Module,
+  MiddlewareConsumer,
+  Global,
+  RequestMethod,
+} from '@nestjs/common';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { TenantMiddleware } from './tenant.middleware';
 import { TenantConnectionService } from '../multi-tenant/tenant-connection.service';
 import { TypeORMCustomerRepository } from './typeorm-customer.repository';
 import { Tenants } from './entities/saas_admin/tenant.entity';
+import { TypeORMTenantRepository } from './typeorm-tenant.repository';
 
 @Global()
 @Module({
@@ -21,7 +27,9 @@ import { Tenants } from './entities/saas_admin/tenant.entity';
           logging: 'all',
           schema: 'saas_admin',
           entities: [Tenants],
-          migrations: ['dist/adapters/out/database/migrations/saas_admin/**/*.js'],
+          migrations: [
+            'dist/adapters/out/database/migrations/saas_admin/**/*.js',
+          ],
         };
         const dataSource = new DataSource(dataSourceOptions);
         await dataSource.initialize();
@@ -35,11 +43,22 @@ import { Tenants } from './entities/saas_admin/tenant.entity';
       provide: 'CustomerRepository',
       useClass: TypeORMCustomerRepository,
     },
+    {
+      provide: 'TenantRepository',
+      useClass: TypeORMTenantRepository,
+    },
   ],
-  exports: ['SAAS_ADMIN_DATASOURCE', TenantConnectionService, 'CustomerRepository'],
+  exports: [
+    'SAAS_ADMIN_DATASOURCE',
+    TenantConnectionService,
+    'CustomerRepository',
+    'TenantRepository',
+  ],
 })
 export class DatabaseModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(TenantMiddleware).forRoutes({ path: 'customers/*', method: RequestMethod.ALL },);
+    consumer
+      .apply(TenantMiddleware)
+      .forRoutes({ path: 'customers/*', method: RequestMethod.ALL });
   }
 }

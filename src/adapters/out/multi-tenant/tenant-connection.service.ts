@@ -1,13 +1,16 @@
 import { Inject, Injectable, Scope } from '@nestjs/common';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Tenants } from '../database/entities/saas_admin/tenant.entity';
+import { CustomerEntity } from '../database/entities/saas_tenant/customer.entity';
+import { Addresses } from '../database/entities/saas_tenant/address.entity';
 
 @Injectable({ scope: Scope.REQUEST })
 export class TenantConnectionService {
   private connections: { [key: string]: DataSource } = {};
 
   constructor(
-    @Inject('SAAS_ADMIN_DATASOURCE') private readonly adminDataSource: DataSource, // Inject saas_admin DataSource
+    @Inject('SAAS_ADMIN_DATASOURCE')
+    private readonly adminDataSource: DataSource, // Inject saas_admin DataSource
   ) {}
 
   // Use saas_admin DataSource to fetch tenant schema info
@@ -39,19 +42,14 @@ export class TenantConnectionService {
       database: process.env.DATABASE_NAME,
       logging: 'all',
       schema: tenantSchema,
-      entities: [],
+      entities: [CustomerEntity, Addresses],
       migrations: ['dist/adapters/out/database/migrations/saas_tenant/**/*.js'],
       extra: {},
     };
 
     const dataSource = new DataSource(dataSourceOptions);
     await dataSource.initialize();
-    await dataSource
-    .createQueryRunner()
-    .createSchema(
-      `${tenantSchema}`,
-      true,
-    );
+    await dataSource.createQueryRunner().createSchema(`${tenantSchema}`, true);
     await dataSource.runMigrations({ transaction: 'each' });
 
     this.connections[connection_name] = dataSource;

@@ -4,7 +4,9 @@ import { TenantConnectionService } from '../multi-tenant/tenant-connection.servi
 
 @Injectable()
 export class TenantMiddleware implements NestMiddleware {
-  constructor(private readonly tenantConnectionService: TenantConnectionService) {}
+  constructor(
+    private readonly tenantConnectionService: TenantConnectionService,
+  ) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
     const tenantId = req.headers['x-tenant-id'] as string;

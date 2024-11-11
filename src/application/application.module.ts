@@ -11,7 +11,12 @@ import { GetTenantByIdUserCase } from './saas-admin-cases/get-tenant-by-id.useca
     CustomerService,
     GetAllTenantsUserCase,
     AdminTenantService,
-    GetTenantByIdUserCase],
-  exports: [GetCustomerInfoUseCase, GetAllTenantsUserCase, GetTenantByIdUserCase],
+    GetTenantByIdUserCase,
+  ],
+  exports: [
+    GetCustomerInfoUseCase,
+    GetAllTenantsUserCase,
+    GetTenantByIdUserCase,
+  ],
 })
 export class ApplicationModule {}
