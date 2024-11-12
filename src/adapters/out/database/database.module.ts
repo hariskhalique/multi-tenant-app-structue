@@ -7,9 +7,10 @@ import {
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { TenantMiddleware } from './tenant.middleware';
 import { TenantConnectionService } from '../multi-tenant/tenant-connection.service';
-import { TypeORMCustomerRepository } from './typeorm-customer.repository';
+import { TypeORMCustomerRepository } from './typeorm-repositories/typeorm-customer.repository';
 import { Tenants } from './entities/saas_admin/tenant.entity';
-import { TypeORMTenantRepository } from './typeorm-tenant.repository';
+import { TypeORMTenantRepository } from './typeorm-repositories/typeorm-tenant.repository';
+import { TenantUtilityService } from './tenant-utility.service';
 
 @Global()
 @Module({
@@ -38,6 +39,7 @@ import { TypeORMTenantRepository } from './typeorm-tenant.repository';
         return dataSource;
       },
     },
+    TenantUtilityService,
     TenantConnectionService,
     {
       provide: 'CustomerRepository',
@@ -51,6 +53,7 @@ import { TypeORMTenantRepository } from './typeorm-tenant.repository';
   exports: [
     'SAAS_ADMIN_DATASOURCE',
     TenantConnectionService,
+    TenantUtilityService,
     'CustomerRepository',
     'TenantRepository',
   ],
