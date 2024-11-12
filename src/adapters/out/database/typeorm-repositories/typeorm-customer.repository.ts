@@ -11,13 +11,13 @@ export class TypeORMCustomerRepository implements CustomerRepository {
   private customRepository: Repository<CustomerEntity>;
   constructor(
     private readonly tenantUtilityService: TenantUtilityService,
-    @Inject('REQUEST') private readonly request: any,
+    @Inject('REQUEST') private readonly request: Request,
   ) {}
 
   private async initializeRepository() {
     this.customRepository = await this.tenantUtilityService.getRepository(
       CustomerEntity,
-      this.request.tenantId,
+      this.request['tenantId'],
     );
   }
   async findById(id: string): Promise<Customer | null> {

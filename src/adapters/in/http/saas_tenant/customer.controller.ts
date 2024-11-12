@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Request } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { GetCustomerInfoUseCase } from 'src/application/saas-tenant-cases/get-customer-info.usecase';
 import { Customer } from 'src/domain/models/saas_tenant/customer.model';
 
@@ -9,10 +9,7 @@ export class CustomerController {
   ) {}
 
   @Get(':id')
-  async getCustomer(
-    @Param('id') id: string,
-    @Request() req,
-  ): Promise<Customer | null> {
+  async getCustomer(@Param('id') id: string): Promise<Customer | null> {
     return await this.getCustomerInfoUseCase.execute(id);
   }
 }

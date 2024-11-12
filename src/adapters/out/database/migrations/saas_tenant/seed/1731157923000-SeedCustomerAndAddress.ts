@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 import { CustomerEntity } from '../../../entities/saas_tenant/customer.entity';
 import { Addresses } from '../../../entities/saas_tenant/address.entity';
 const customers = [
@@ -33,7 +33,7 @@ const customers = [
 
 export class SeedCustomerAddress1731157923000 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    customers.map((customer) => {
+    for (const customer of customers) {
       const customer_entity_object = new CustomerEntity();
       customer_entity_object.email = customer.email;
       customer_entity_object.name = customer.name;
@@ -48,7 +48,7 @@ export class SeedCustomerAddress1731157923000 implements MigrationInterface {
       queryRunner.connection
         .getRepository(CustomerEntity)
         .save(customer_entity_object);
-    });
+    }
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
