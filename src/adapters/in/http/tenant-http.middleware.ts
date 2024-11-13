@@ -1,10 +1,12 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { TenantConnectionService } from '../multi-tenant/tenant-connection.service';
+import { TenantConnectionService } from '../../out/multi-tenant/tenant-connection.service';
+import { TenantContextService } from 'src/adapters/common/tenant-context.service';
 
 @Injectable()
 export class TenantMiddleware implements NestMiddleware {
   constructor(
+    private readonly tenantContextService: TenantContextService,
     private readonly tenantConnectionService: TenantConnectionService,
   ) {}
 
@@ -18,7 +20,7 @@ export class TenantMiddleware implements NestMiddleware {
     try {
       // Validate and establish tenant connection
       await this.tenantConnectionService.getTenantConnection(tenantId);
-      req['tenantId'] = tenantId;
+      this.tenantContextService.setTenantId(tenantId);
       next();
     } catch (error) {
       res.status(400).send({ error: error });

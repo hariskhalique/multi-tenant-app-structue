@@ -24,16 +24,18 @@ export function toCustomerModel(customerEntity: CustomerEntity): Customer {
 
 export function toCustomerEntity(customer: Customer): CustomerEntity {
   const customerEntity = new CustomerEntity();
-  customerEntity.id = customer.id;
   customerEntity.name = customer.name;
   customerEntity.email = customer.email;
-  customerEntity.addresses = customer.addresses.map((address) => {
-    const addressEntity = new Addresses();
-    addressEntity.id = address.id;
-    addressEntity.street = address.street;
-    addressEntity.city = address.city;
-    addressEntity.postalCode = address.postalCode;
-    return addressEntity;
-  });
+  customerEntity.addresses = [];
+  if (customer.addresses) {
+    customerEntity.addresses = customer.addresses.map((address) => {
+      const addressEntity = new Addresses();
+      addressEntity.id = address.id;
+      addressEntity.street = address.street;
+      addressEntity.city = address.city;
+      addressEntity.postalCode = address.postalCode;
+      return addressEntity;
+    });
+  }
   return customerEntity;
 }

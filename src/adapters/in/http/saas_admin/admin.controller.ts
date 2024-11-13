@@ -1,13 +1,13 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { Tenant } from 'src/domain/models/saas_admin/tenant.model';
-import { GetAllTenantsUserCase } from 'src/application/saas-admin-cases/get-all-tenant.usecase';
-import { GetTenantByIdUserCase } from 'src/application/saas-admin-cases/get-tenant-by-id.usecase';
+import { GetAllTenantsUseCase } from 'src/application/saas-admin-cases/get-all-tenant.usecase';
+import { GetTenantByIdUseCase } from 'src/application/saas-admin-cases/get-tenant-by-id.usecase';
 
 @Controller('admin')
 export class AdminController {
   constructor(
-    private readonly getAllTenantUserCase: GetAllTenantsUserCase,
-    private readonly getTenantByIdUserCase: GetTenantByIdUserCase,
+    private readonly getAllTenantUserCase: GetAllTenantsUseCase,
+    private readonly getTenantByIdUserCase: GetTenantByIdUseCase,
   ) {}
 
   @Get('/tenants')

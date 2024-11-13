@@ -5,15 +5,17 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { TenantMiddleware } from './tenant.middleware';
+import { TenantMiddleware } from '../../in/http/tenant-http.middleware';
 import { TenantConnectionService } from '../multi-tenant/tenant-connection.service';
 import { TypeORMCustomerRepository } from './typeorm-repositories/typeorm-customer.repository';
 import { Tenants } from './entities/saas_admin/tenant.entity';
 import { TypeORMTenantRepository } from './typeorm-repositories/typeorm-tenant.repository';
 import { TenantUtilityService } from './tenant-utility.service';
+import { TenantContextModule } from 'src/adapters/common/common.module';
 
 @Global()
 @Module({
+  imports: [TenantContextModule],
   providers: [
     {
       provide: 'SAAS_ADMIN_DATASOURCE',

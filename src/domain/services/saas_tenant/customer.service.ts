@@ -12,4 +12,8 @@ export class CustomerService {
   async getCustomerInfo(id: string): Promise<Customer | null> {
     return await this.customerRepository.findById(id);
   }
+
+  async saveCustomer(customer_data: Customer): Promise<Customer | null> {
+    return await this.customerRepository.save(customer_data);
+  }
 }

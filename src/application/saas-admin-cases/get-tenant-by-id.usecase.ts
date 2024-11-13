@@ -3,7 +3,7 @@ import { Tenant } from 'src/domain/models/saas_admin/tenant.model';
 import { AdminTenantService } from 'src/domain/services/saas_admin/admin-tenant.service';
 
 @Injectable()
-export class GetTenantByIdUserCase {
+export class GetTenantByIdUseCase {
   constructor(private readonly adminTenantService: AdminTenantService) {}
 
   async execute(tenantId: string): Promise<Tenant> {
