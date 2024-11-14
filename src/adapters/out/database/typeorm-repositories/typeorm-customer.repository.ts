@@ -46,9 +46,10 @@ export class TypeORMCustomerRepository implements CustomerRepository {
 
   async save(customer: Customer): Promise<Customer | null> {
     if (!this.customRepository) await this.initializeRepository();
-    const customerEntity = toCustomerEntity(customer);
-    console.log(customerEntity);
-    await this.customRepository.save(customerEntity);
-    return customer;
+    const customer_entity = await this.customRepository.save(
+      toCustomerEntity(customer),
+    );
+
+    return customer_entity ? toCustomerModel(customer_entity) : null;
   }
 }

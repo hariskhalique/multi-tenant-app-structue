@@ -1,17 +1,18 @@
-import { Inject, Injectable, Scope } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Tenants } from '../database/entities/saas_admin/tenant.entity';
 import { CustomerEntity } from '../database/entities/saas_tenant/customer.entity';
 import { Addresses } from '../database/entities/saas_tenant/address.entity';
+import { SaasAdminDataSource } from '../database/saas-admin.datasource';
 
 @Injectable({ scope: Scope.REQUEST })
 export class TenantConnectionService {
   private connections: { [key: string]: DataSource } = {};
+  private adminDataSource: DataSource;
 
-  constructor(
-    @Inject('SAAS_ADMIN_DATASOURCE')
-    private readonly adminDataSource: DataSource, // Inject saas_admin DataSource
-  ) {}
+  constructor() {
+    this.adminDataSource = SaasAdminDataSource.getInstance();
+  }
 
   // Use saas_admin DataSource to fetch tenant schema info
   private async getTenantSchema(tenantId: string): Promise<string> {

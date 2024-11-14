@@ -9,8 +9,7 @@ import { CustomerGRPCService } from './adapters/in/grpc/customer-grpc.service';
 import { HealthService } from './adapters/in/grpc/health-grpc.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TenantGrpcInterceptor } from './adapters/in/grpc/tenant-grpc.interceptor';
-import { TenantContextModule } from './adapters/common/common.module';
-
+import { TenantContextModule } from './adapters/common/tenant-context.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
