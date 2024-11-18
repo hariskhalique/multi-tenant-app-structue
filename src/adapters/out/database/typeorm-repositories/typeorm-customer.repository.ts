@@ -36,7 +36,7 @@ export class TypeORMCustomerRepository implements CustomerRepository {
   }
 
   async find(): Promise<Customer[] | null> {
-    if (!this.customRepository) this.initializeRepository();
+    if (!this.customRepository) await this.initializeRepository();
     const customers = await this.customRepository.find({
       relations: ['addresses'],
     });

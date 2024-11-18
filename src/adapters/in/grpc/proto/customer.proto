@@ -4,15 +4,31 @@ package customer;
 
 service CustomerService {
     rpc CreateCustomer (CreateCustomerRequest) returns (CustomerResponse);
+    rpc Customers(Empty) returns (CustomersResponse);
+}
+
+message Address {
+    string id = 1;
+    string street = 2;
+    string city = 3;
+    string postalCode = 4;
 }
 
 message CreateCustomerRequest {
     string name = 1;
     string email = 2;
+    repeated Address addresses = 3;
 }
 
 message CustomerResponse {
     string id = 1;
     string name = 2;
     string email = 3;
+    repeated Address addresses = 4;
 }
+
+message CustomersResponse {
+    repeated CustomerResponse customers = 1;
+}
+
+message Empty {}

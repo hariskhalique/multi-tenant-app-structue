@@ -30,7 +30,6 @@ export function toCustomerEntity(customer: Customer): CustomerEntity {
   if (customer.addresses) {
     customerEntity.addresses = customer.addresses.map((address) => {
       const addressEntity = new Addresses();
-      addressEntity.id = address.id;
       addressEntity.street = address.street;
       addressEntity.city = address.city;
       addressEntity.postalCode = address.postalCode;
