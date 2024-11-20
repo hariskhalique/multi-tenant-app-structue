@@ -1,11 +1,9 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TenantConnectionService } from './tenant-connection.service';
 import { TenantContextModule } from 'src/adapters/common/tenant-context.module';
 
 @Module({
-  imports: [
-    forwardRef(() => TenantContextModule), // Use forwardRef if TenantConnectionService depends on TenantContextService
-  ],
+  imports: [TenantContextModule],
   providers: [TenantConnectionService],
   exports: [TenantConnectionService],
 })

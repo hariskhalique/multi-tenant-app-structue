@@ -11,7 +11,7 @@ import { TenantConnectionService } from 'src/adapters/out/multi-tenant/tenant-co
 
 @Injectable()
 export class TenantGrpcInterceptor<T> implements NestInterceptor {
-  private tenantConnectionService: TenantConnectionService;
+  private readonly tenantConnectionService: TenantConnectionService;
   constructor(private readonly tenantContext: TenantContextService) {
     this.tenantConnectionService = new TenantConnectionService();
   }
