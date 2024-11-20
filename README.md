@@ -81,8 +81,8 @@ The application follows **Hexagonal Architecture** with the following main layer
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/multi-tenant-saas-app.git
-   cd multi-tenant-saas-app
+   git clone https://github.com/MVPFactory/https-github.com-MVPFactory-Internal-Template-NestJs-Hexagonal-arch.git
+   cd [FOLDER-NAME]
 
 2. **Install Dependencies**
 
