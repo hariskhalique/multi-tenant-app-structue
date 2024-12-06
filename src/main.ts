@@ -40,6 +40,7 @@ async function bootstrap() {
 
 async function bootstrapHttpApp() {
   const app = await NestFactory.create(AppModule);
+
   app.useGlobalFilters(new HttpExceptionFilter(), new GlobalExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
 

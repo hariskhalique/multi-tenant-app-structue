@@ -2,10 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { CustomerRepository } from '../../../../domain/repositories/saas_tenant/customer.repository.interface';
 import { CustomerEntity } from '../entities/saas_tenant/customer.entity';
 import { Customer } from 'src/domain/models/saas_tenant/customer.model';
-import {
-  toCustomerEntity,
-  toCustomerModel,
-} from '../mappers/saas-tenant-customer.mapper';
+import { toCustomerEntity, toCustomerModel } from '../mappers/customer.mapper';
 import { TenantUtilityService } from '../tenant-utility.service';
 import { Repository } from 'typeorm';
 import { TenantContextService } from 'src/adapters/common/tenant-context.service';

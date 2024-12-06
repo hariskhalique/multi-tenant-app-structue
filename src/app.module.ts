@@ -10,12 +10,14 @@ import { HealthService } from './adapters/in/grpc/health-grpc.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TenantGrpcInterceptor } from './adapters/in/grpc/tenant-grpc.interceptor';
 import { TenantContextModule } from './adapters/common/tenant-context.module';
+import { FeatureFlagInterceptor } from './adapters/in/http/feature-flag.interceptor';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
     DatabaseModule,
-    ApplicationModule,
     DomainModule,
+    ApplicationModule,
     TenantContextModule,
   ],
   providers: [
@@ -23,6 +25,7 @@ import { TenantContextModule } from './adapters/common/tenant-context.module';
       provide: APP_INTERCEPTOR,
       useClass: TenantGrpcInterceptor,
     },
+    FeatureFlagInterceptor,
   ],
   controllers: [
     CustomerController,

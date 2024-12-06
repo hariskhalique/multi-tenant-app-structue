@@ -3,7 +3,7 @@ import { Tenant } from 'src/domain/models/saas_admin/tenant.model';
 import { DataSource } from 'typeorm';
 import { TenantRepository } from 'src/domain/repositories/saas_admin/tenant.repository.interface';
 import { Tenants } from '../entities/saas_admin/tenant.entity';
-import { toTenantModel } from '../mappers/saas-admin-tennats.mapper';
+import { toTenantModel } from '../mappers/tennats.mapper';
 
 @Injectable({ scope: Scope.REQUEST })
 export class TypeORMTenantRepository implements TenantRepository {

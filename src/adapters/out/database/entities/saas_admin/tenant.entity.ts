@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { FeatureFlags } from './feature-flag.entity';
 
 @Entity({ schema: 'saas_admin', name: 'tenants' })
 export class Tenants {
@@ -10,4 +11,9 @@ export class Tenants {
 
   @Column()
   schema: string; // Schema associated with this tenant
+
+  @OneToMany(() => FeatureFlags, (featureFlag) => featureFlag.tenant, {
+    cascade: true,
+  })
+  featureFlags: FeatureFlags;
 }

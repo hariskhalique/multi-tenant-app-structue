@@ -45,7 +45,10 @@ export class TenantConnectionService {
       schema: tenantSchema,
       entities: [CustomerEntity, Addresses],
       migrations: ['dist/adapters/out/database/migrations/saas_tenant/**/*.js'],
-      extra: {},
+      extra: {
+        max: 10,
+        idleTimeoutMillis: 30000,
+      },
     };
 
     const dataSource = new DataSource(dataSourceOptions);

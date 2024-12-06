@@ -1,5 +1,6 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Tenants } from './entities/saas_admin/tenant.entity';
+import { FeatureFlags } from './entities/saas_admin/feature-flag.entity';
 
 export class SaasAdminDataSource {
   private static instance: DataSource;
@@ -21,7 +22,7 @@ export class SaasAdminDataSource {
       database: process.env.DATABASE_NAME,
       logging: 'all',
       schema: 'saas_admin',
-      entities: [Tenants],
+      entities: [Tenants, FeatureFlags],
       migrations: ['dist/adapters/out/database/migrations/saas_admin/**/*.js'],
     };
     const dataSource = new DataSource(dataSourceOptions);

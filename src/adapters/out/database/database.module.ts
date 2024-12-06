@@ -10,6 +10,7 @@ import { TypeORMTenantRepository } from './typeorm-repositories/typeorm-tenant.r
 import { TenantUtilityService } from './tenant-utility.service';
 import { TenantConnectionModule } from '../multi-tenant/tenant-connection.module';
 import { SaasAdminDataSource } from './saas-admin.datasource';
+import { TypeORMFeatureFlagRepository } from './typeorm-repositories/typeorm-feautre-flag.repository';
 
 @Global()
 @Module({
@@ -28,12 +29,17 @@ import { SaasAdminDataSource } from './saas-admin.datasource';
       provide: 'TenantRepository',
       useClass: TypeORMTenantRepository,
     },
+    {
+      provide: 'FeatureFlagRepository',
+      useClass: TypeORMFeatureFlagRepository,
+    },
   ],
   exports: [
     'SAAS_ADMIN_DATASOURCE',
     TenantUtilityService,
     'CustomerRepository',
     'TenantRepository',
+    'FeatureFlagRepository',
   ],
 })
 export class DatabaseModule {
